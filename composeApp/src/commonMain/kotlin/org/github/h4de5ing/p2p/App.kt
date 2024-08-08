@@ -34,9 +34,6 @@ fun P2P() {
         runAsync {
             chatNode = ChatNode(::chatMessage)
         }
-//        repeat(1000) {
-//            chatMessage("写入了大量的数据:${it}\n")
-//        }
     }
     Column(modifier = Modifier.fillMaxSize().padding(10.dp)) {
         Row(
@@ -44,7 +41,10 @@ fun P2P() {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            OutlinedTextField(value = send, onValueChange = { send = it })
+            OutlinedTextField(value = send,
+                onValueChange = { send = it },
+                singleLine = true,
+            )
             Button(onClick = { chatNode?.send(send) }) { Text(text = "发送") }
         }
         Text(text = log, modifier = Modifier.fillMaxWidth().verticalScroll(scrollState))

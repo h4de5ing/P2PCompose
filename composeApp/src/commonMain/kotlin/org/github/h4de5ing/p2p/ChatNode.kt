@@ -6,6 +6,7 @@ import io.libp2p.core.PeerInfo
 import io.libp2p.core.Stream
 import io.libp2p.core.dsl.host
 import io.libp2p.discovery.MDnsDiscovery
+import io.libp2p.protocol.Ping
 import java.net.Inet4Address
 import java.net.InetAddress
 import java.net.NetworkInterface
@@ -26,6 +27,7 @@ class ChatNode(private val printMsg: OnMessage) {
     private val chatHost = host {
         protocols {
             +Chat(::messageReceived)
+            +Ping()
         }
         network {
             listen("/ip4/$address/tcp/0")
